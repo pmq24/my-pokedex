@@ -2,6 +2,8 @@ import { type LoaderFunction, redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { capitalize } from 'lodash';
 import Container from 'app/components/container';
+import TypeList from 'app/components/type-list';
+import StatsTable from '../../../components/stats-table';
 
 export const loader: LoaderFunction = async function (data) {
   const id = data.params.id;
@@ -31,11 +33,16 @@ export default function PokemonDetails() {
           />
         </section>
         <section className="w-2/3">
-          {pokemon.types.map((type: any) => (
-            <span className="badge mr-1" key={type.slot}>
-              {type.type.name}
-            </span>
-          ))}
+          <TypeList types={pokemon.types.map((t) => t.type.name)} />
+          <StatsTable
+            stats={pokemon.stats.reduce((stats, currentStats) => {
+              stats[currentStats.stat.name] = {
+                base_stat: currentStats.base_stat,
+                effort: currentStats.effort,
+              };
+              return stats;
+            }, {})}
+          />
         </section>
       </section>
     </Container>

@@ -1,3 +1,5 @@
+import { capitalize } from 'lodash';
+
 type Type =
   | 'normal'
   | 'fire'
@@ -18,8 +20,18 @@ type Type =
   | 'steel'
   | 'fairy';
 
-type Props = Type[];
+type Props = {
+  types: Type[];
+};
 
 export default function TypeList(props: Props) {
-  return <div className="flex"></div>;
+  return (
+    <div className="flex">
+      {props.types.map((type) => (
+        <span className="badge mr-1" key={type}>
+          {capitalize(type)}
+        </span>
+      ))}
+    </div>
+  );
 }

@@ -21,21 +21,25 @@ type Type =
   | 'fairy';
 
 export type Props = {
-  types: Type[];
+  types?: Type[];
 };
 
 export default function TypeList(props: Props) {
   return (
     <div className="flex flex-wrap flex-initial gap-px w-full">
-      {props.types.map((type) => (
-        <span
-          className="badge"
-          key={type}
-          style={{ backgroundColor: getColorOfType(type) }}
-        >
-          {capitalize(type)}
-        </span>
-      ))}
+      {props.types && props.types.length ? (
+        props.types.map((type) => (
+          <span
+            className="badge"
+            key={type}
+            style={{ backgroundColor: getColorOfType(type) }}
+          >
+            {capitalize(type)}
+          </span>
+        ))
+      ) : (
+        <span className="badge">?</span>
+      )}
     </div>
   );
 }

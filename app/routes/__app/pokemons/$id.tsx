@@ -4,6 +4,8 @@ import { capitalize } from 'lodash';
 import Container from 'app/components/container';
 import TypeList from 'app/components/type-list';
 import StatsTable from '../../../components/stats-table';
+import HeightWeightTable from '../../../components/height-weight-table';
+import Tabs from 'app/components/tabs';
 
 export const loader: LoaderFunction = async function (data) {
   const id = data.params.id;
@@ -34,17 +36,31 @@ export default function PokemonDetails() {
         </section>
         <section className="w-2/3">
           <TypeList types={pokemon.types.map((t) => t.type.name)} />
-          <StatsTable
-            stats={pokemon.stats.reduce((stats, currentStats) => {
-              stats[currentStats.stat.name] = {
-                base_stat: currentStats.base_stat,
-                effort: currentStats.effort,
-              };
-              return stats;
-            }, {})}
-          />
+          <HeightWeightTable height={pokemon.height} weight={pokemon.weight} />
         </section>
       </section>
+      <Tabs
+        tabs={{
+          stats: {
+            label: 'Stats',
+            content: (
+              <StatsTable
+                stats={pokemon.stats.reduce((stats, currentStats) => {
+                  stats[currentStats.stat.name] = {
+                    base_stat: currentStats.base_stat,
+                    effort: currentStats.effort,
+                  };
+                  return stats;
+                }, {})}
+              />
+            ),
+          },
+          moves: {
+            label: 'Moves',
+            content: <h1>Moves</h1>,
+          },
+        }}
+      />
     </Container>
   );
 }

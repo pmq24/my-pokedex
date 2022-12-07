@@ -31,7 +31,7 @@ export default function PokemonDetails() {
         <section className="w-1/3">
           <img
             className="w-full"
-            src={pokemon.sprites.front_default}
+            src={pokemon.sprites.other['official-artwork']['front_default']}
             alt="Pokemon's front sprite"
           />
         </section>

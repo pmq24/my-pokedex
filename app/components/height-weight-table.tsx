@@ -8,14 +8,16 @@ export default function HeightWeightTable({ height, weight }: Props) {
     <div className="w-full prose">
       <h1>Size and Mass</h1>
       <table className="table w-full">
-        <tr>
-          <td>Height</td>
-          <td>{height ?? '?'}</td>
-        </tr>
-        <tr>
-          <td>Weight</td>
-          <td>{weight ?? '?'}</td>
-        </tr>
+        <tbody>
+          <tr>
+            <td>Height</td>
+            <td>{height ?? '?'}</td>
+          </tr>
+          <tr>
+            <td>Weight</td>
+            <td>{weight ?? '?'}</td>
+          </tr>
+        </tbody>
       </table>
     </div>
   );

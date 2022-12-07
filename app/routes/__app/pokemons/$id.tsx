@@ -6,6 +6,7 @@ import TypeList from 'app/components/type-list';
 import StatsTable from '../../../components/stats-table';
 import HeightWeightTable from '../../../components/height-weight-table';
 import Tabs from 'app/components/tabs';
+import MovesTable from '../../../components/moves-table';
 
 export const loader: LoaderFunction = async function (data) {
   const id = data.params.id;
@@ -57,7 +58,7 @@ export default function PokemonDetails() {
           },
           moves: {
             label: 'Moves',
-            content: <h1>Moves</h1>,
+            content: <MovesTable moves={pokemon.moves} />,
           },
         }}
       />

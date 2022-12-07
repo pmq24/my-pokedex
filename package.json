@@ -17,6 +17,8 @@
     "cross-env": "^7.0.3",
     "daisyui": "^2.42.1",
     "express": "^4.18.2",
+    "graphql": "^16.6.0",
+    "graphql-request": "^5.0.0",
     "isbot": "^3.6.5",
     "lodash": "^4.17.21",
     "morgan": "^1.10.0",

@@ -9,7 +9,7 @@ export default function StatsTable({ stats }: Props) {
   return (
     <div className="w-full prose">
       <h1>Stats</h1>
-      <table className="table">
+      <table className="">
         <thead>
           <tr>
             <th></th>

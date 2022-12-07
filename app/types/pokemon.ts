@@ -1,3 +1,8 @@
+import { Move } from './move';
+import { Stat } from './stat';
+
+type URL = string;
+
 export type Pokemon = {
   id: number;
   name: string;
@@ -5,26 +10,29 @@ export type Pokemon = {
   weight: number;
   stats: Stat[];
   moves: Move[];
-};
-
-export type Stat = {
-  base_stat: number;
-  effort: number;
-  stat: {
-    name: StatName;
-    url: string;
+  sprites: {
+    back_default: URL;
+    back_female?: URL;
+    back_shiny: URL;
+    back_shiny_female?: URL;
+    front_default: URL;
+    front_female?: URL;
+    front_shiny: URL;
+    front_shiny_female?: URL;
+    other: {
+      dream_world: {
+        front_default: URL;
+        front_female?: URL;
+      };
+      home: {
+        front_default: URL;
+        front_female?: URL;
+        front_shiny: URL;
+        front_shiny_female?: URL;
+      };
+      'official-artwork': {
+        front_default: URL;
+      };
+    };
   };
-};
-
-export const StatNameValues = [
-  'hp',
-  'attack',
-  'defense',
-  'special-attack',
-  'special-defense',
-] as const;
-type StatName = typeof StatNameValues[number];
-
-export type Move = {
-  name: string;
 };

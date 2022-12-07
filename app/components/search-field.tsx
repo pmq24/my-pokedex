@@ -24,14 +24,18 @@ async function search(query: string) {
 export default function SearchField() {
   const [searchString, setSearchString] = useState('');
   const [searchResult, setSearchResult] = useState<SearchResult[]>([]);
-
-  const shouldHideAutoComplete = !searchString.trim();
+  const emptySearchString = !searchString.trim();
 
   useEffect(() => {
-    search(searchString).then((result) =>
-      setSearchResult(result.pokemon_v2_pokemon)
-    );
-  }, [searchString]);
+    if (!emptySearchString) {
+      const debounceTimeout = setTimeout(() => {
+        search(searchString).then((result) =>
+          setSearchResult(result.pokemon_v2_pokemon)
+        );
+      }, 250);
+      return () => clearTimeout(debounceTimeout);
+    }
+  }, [searchString, emptySearchString]);
 
   return (
     <div className="relative w-full flex">
@@ -44,7 +48,7 @@ export default function SearchField() {
       />
       <ul
         className={` ${
-          shouldHideAutoComplete ? 'hidden' : ''
+          emptySearchString ? 'hidden' : ''
         } menu absolute top-full w-full bg-base-100 shadow-md rounded-box z-50`}
       >
         {!searchResult || !searchResult.length ? (

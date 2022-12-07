@@ -9,17 +9,16 @@ import Tabs from 'app/components/tabs';
 import MovesTable from '../../../components/moves-table';
 import { useContext, useEffect, useState } from 'react';
 import { PokemonStoreContext } from '../../../lib/pokemon-store';
+import api from 'app/lib/api';
 
 export const loader: LoaderFunction = async function (data) {
   const id = data.params.id;
 
-  if (!id || isNaN(+id) || +id < 0) {
+  if (!id) {
     throw redirect('/');
   }
 
-  const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-
-  return res.json();
+  return await api.pokemons.findPokemonByID(+id);
 };
 
 export default function PokemonDetails() {

@@ -10,7 +10,7 @@ export class PokemonAPI {
     }
 
     try {
-      const res = await this.axios.get<Pokemon>(`/pokemons/${id}`);
+      const res = await this.axios.get<Pokemon>(`/pokemon/${id}`);
       return res.data;
     } catch (e) {
       throw e instanceof AxiosError && e.code === '404'

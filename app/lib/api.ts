@@ -1,11 +1,9 @@
 import { Axios } from 'axios';
-import fetchAdapter from '@vespaiach/axios-fetch-adapter';
 import { PokemonAPI } from './pokemon-api';
 
 class API {
   constructor() {
     this.axios = new Axios({
-      adapter: fetchAdapter,
       baseURL: 'https://pokeapi.co/api/v2/',
     });
     this.pokemons = new PokemonAPI(this.axios);

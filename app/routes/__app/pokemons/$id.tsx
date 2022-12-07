@@ -44,17 +44,7 @@ export default function PokemonDetails() {
         tabs={{
           stats: {
             label: 'Stats',
-            content: (
-              <StatsTable
-                stats={pokemon.stats.reduce((stats, currentStats) => {
-                  stats[currentStats.stat.name] = {
-                    base_stat: currentStats.base_stat,
-                    effort: currentStats.effort,
-                  };
-                  return stats;
-                }, {})}
-              />
-            ),
+            content: <StatsTable stats={pokemon.stats} />,
           },
           moves: {
             label: 'Moves',

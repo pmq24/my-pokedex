@@ -1,5 +1,5 @@
 import { type LoaderFunction, redirect } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { useLoaderData, useOutletContext } from '@remix-run/react';
 import { capitalize } from 'lodash';
 import TypeChips from 'app/components/type-chips';
 import StatsTable from '../../../components/stats-table';
@@ -9,6 +9,9 @@ import MovesTable from '../../../components/moves-table';
 import { useEffect, useState } from 'react';
 import api from 'app/lib/api';
 import { type Pokemon } from 'app/types/pokemon';
+import type { SupabaseOutletContext } from '../../../types/supabase/supabase-outlet-context';
+import API from '../../../api/api';
+import { MdOutlineHourglassEmpty } from 'react-icons/md';
 
 export const loader: LoaderFunction = async function (data): Promise<Pokemon> {
   const id = data.params.id;
@@ -21,6 +24,9 @@ export const loader: LoaderFunction = async function (data): Promise<Pokemon> {
 };
 
 export default function PokemonDetails() {
+  const { supabase } = useOutletContext<SupabaseOutletContext>();
+  const api = new API(supabase);
+
   const pokemon = useLoaderData<Pokemon>();
 
   const [owned, setOwned] = useState(false);
@@ -28,10 +34,12 @@ export default function PokemonDetails() {
 
   useEffect(() => {
     if (hasUpdate) {
-      api.ownedPokemons.ownsPokemonWithID(pokemon.id).then(setOwned);
-      setHasUpdate(false);
+      api.pokemons
+        .ownsPokemon(pokemon.id)
+        .then(setOwned)
+        .then(() => setHasUpdate(false));
     }
-  }, [pokemon, hasUpdate]);
+  }, [supabase, hasUpdate, pokemon, api.pokemons]);
 
   return (
     <>
@@ -43,17 +51,17 @@ export default function PokemonDetails() {
           className={`btn ${owned ? 'btn-outline btn-success' : ''}`}
           onClick={
             owned
-              ? () => {
-                  api.ownedPokemons.removeOwnedPokemonWithID(pokemon.id);
-                  setHasUpdate(true);
-                }
-              : () => {
-                  api.ownedPokemons.addOwnedPokemonWithID(pokemon.id);
-                  setHasUpdate(true);
-                }
+              ? () =>
+                  api.pokemons
+                    .releasePokemon(pokemon.id)
+                    .then(() => setHasUpdate(true))
+              : () =>
+                  api.pokemons
+                    .catchPokemon(pokemon.id)
+                    .then(() => setHasUpdate(true))
           }
         >
-          {owned ? 'Owned' : 'Own'}
+          {hasUpdate ? <MdOutlineHourglassEmpty /> : owned ? 'Owned' : 'Own'}
         </button>
       </div>
       <section className="flex">

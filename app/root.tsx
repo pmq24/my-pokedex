@@ -7,6 +7,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react';
+import { ToastContainer } from 'react-toastify';
 import styles from './styles/app.css';
 
 export function links() {
@@ -27,6 +28,7 @@ export default function App() {
         <Links />
       </head>
       <body>
+        <ToastContainer position="bottom-left" />
         <Outlet />
         <ScrollRestoration />
         <Scripts />

@@ -11,16 +11,16 @@ export interface Database {
     Tables: {
       owned_pokemon: {
         Row: {
-          user: string;
-          pokemon: number;
+          user_id: string;
+          pokemon_id: number;
         };
         Insert: {
-          user: string;
-          pokemon: number;
+          user_id: string;
+          pokemon_id: number;
         };
         Update: {
-          user?: string;
-          pokemon?: number;
+          user_id?: string;
+          pokemon_id?: number;
         };
       };
     };

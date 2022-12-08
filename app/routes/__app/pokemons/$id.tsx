@@ -2,7 +2,7 @@ import { type LoaderFunction, redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { capitalize } from 'lodash';
 import Container from 'app/components/container';
-import TypeList from 'app/components/type-list';
+import TypeChips from 'app/components/type-chips';
 import StatsTable from '../../../components/stats-table';
 import HeightWeightTable from '../../../components/height-weight-table';
 import Tabs from 'app/components/tabs';
@@ -66,7 +66,7 @@ export default function PokemonDetails() {
           />
         </section>
         <section className="w-2/3">
-          <TypeList types={pokemon.types.map((t) => t.type.name)} />
+          <TypeChips types={pokemon.types} />
           <HeightWeightTable height={pokemon.height} weight={pokemon.weight} />
         </section>
       </section>

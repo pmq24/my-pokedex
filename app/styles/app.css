@@ -5607,6 +5607,27 @@ html {
   outline: 2px solid hsl(var(--su));
 }
 
+.btn-error {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--er) / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--er) / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: hsl(var(--erc, var(--nc)) / var(--tw-text-opacity));
+}
+
+.btn-error:hover,
+    .btn-error.btn-active {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--er) / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--er) / var(--tw-bg-opacity));
+}
+
+.btn-error:focus-visible {
+  outline: 2px solid hsl(var(--er));
+}
+
 .btn.glass:hover,
     .btn.glass.btn-active {
   --glass-opacity: 25%;
@@ -5614,6 +5635,43 @@ html {
 }
 
 .btn.glass:focus-visible {
+  outline: 2px solid currentColor;
+}
+
+.btn-ghost {
+  border-width: 1px;
+  border-color: transparent;
+  background-color: transparent;
+  color: currentColor;
+}
+
+.btn-ghost:hover,
+    .btn-ghost.btn-active {
+  --tw-border-opacity: 0;
+  background-color: hsl(var(--bc) / var(--tw-bg-opacity));
+  --tw-bg-opacity: 0.2;
+}
+
+.btn-ghost:focus-visible {
+  outline: 2px solid currentColor;
+}
+
+.btn-link {
+  border-color: transparent;
+  background-color: transparent;
+  --tw-text-opacity: 1;
+  color: hsl(var(--p) / var(--tw-text-opacity));
+  text-decoration-line: underline;
+}
+
+.btn-link:hover,
+    .btn-link.btn-active {
+  border-color: transparent;
+  background-color: transparent;
+  text-decoration-line: underline;
+}
+
+.btn-link:focus-visible {
   outline: 2px solid currentColor;
 }
 
@@ -5858,6 +5916,18 @@ html {
 
 .drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-success {
   outline: 2px solid hsl(var(--su));
+}
+
+.drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-error {
+  outline: 2px solid hsl(var(--er));
+}
+
+.drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-ghost {
+  outline: 2px solid currentColor;
+}
+
+.drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-link {
+  outline: 2px solid currentColor;
 }
 
 .label a:hover {

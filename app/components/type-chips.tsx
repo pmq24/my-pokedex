@@ -1,40 +1,21 @@
 import { capitalize } from 'lodash';
-
-type Type =
-  | 'normal'
-  | 'fire'
-  | 'water'
-  | 'grass'
-  | 'electric'
-  | 'ice'
-  | 'fighting'
-  | 'poison'
-  | 'ground'
-  | 'flying'
-  | 'psychic'
-  | 'bug'
-  | 'rock'
-  | 'ghost'
-  | 'dark'
-  | 'dragon'
-  | 'steel'
-  | 'fairy';
+import { type Type } from 'app/types/type';
 
 export type Props = {
   types?: Type[];
 };
 
-export default function TypeList(props: Props) {
+export default function TypeChips(props: Props) {
   return (
     <div className="flex flex-wrap flex-initial gap-px w-full">
       {props.types && props.types.length ? (
         props.types.map((type) => (
           <span
             className="badge"
-            key={type}
-            style={{ backgroundColor: getColorOfType(type) }}
+            key={type.slot}
+            style={{ backgroundColor: getColorOfType(type.type.name) }}
           >
-            {capitalize(type)}
+            {capitalize(type.type.name)}
           </span>
         ))
       ) : (
@@ -44,7 +25,7 @@ export default function TypeList(props: Props) {
   );
 }
 
-function getColorOfType(type: Type) {
+function getColorOfType(type: string) {
   switch (type) {
     case 'normal':
       return '#A8A878';

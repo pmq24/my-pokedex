@@ -1,5 +1,6 @@
-import { Move } from './move';
-import { Stat } from './stat';
+import { type Move } from './move';
+import { type Stat } from './stat';
+import { type Type } from './type';
 
 type URL = string;
 
@@ -10,6 +11,7 @@ export type Pokemon = {
   weight: number;
   stats: Stat[];
   moves: Move[];
+  types: Type[];
   sprites: {
     back_default: URL;
     back_female?: URL;

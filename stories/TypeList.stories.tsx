@@ -1,9 +1,9 @@
 import type { Meta, StoryFn } from '@storybook/react';
-import TypeList, { type Props } from '../app/components/type-list';
+import TypeChips, { type Props } from '../app/components/type-chips';
 
 export default {
   title: 'TypeList',
-  component: TypeList,
+  component: TypeChips,
   parameters: {
     docs: {
       description: {
@@ -20,7 +20,7 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn<Props> = (args) => <TypeList {...args} />;
+const Template: StoryFn<Props> = (args) => <TypeChips {...args} />;
 
 export const Example = Template.bind({});
 Example.args = {

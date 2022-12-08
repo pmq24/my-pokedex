@@ -14,6 +14,7 @@ import {
   createBrowserClient,
 } from '@supabase/auth-helpers-remix';
 import { useState, useEffect } from 'react';
+import { Database } from './lib/database.types';
 import styles from './styles/app.css';
 
 export function links() {
@@ -63,7 +64,7 @@ export default function App() {
   const fetcher = useFetcher();
 
   const [supabase] = useState(() =>
-    createBrowserClient(env.SUPABASE_URL, env.SUPABASE_ANON_KEY)
+    createBrowserClient<Database>(env.SUPABASE_URL, env.SUPABASE_ANON_KEY)
   );
 
   const serverAccessToken = session?.access_token;
@@ -86,7 +87,6 @@ export default function App() {
       subscription.unsubscribe();
     };
   }, [serverAccessToken, supabase, fetcher]);
-
   return (
     <html lang="en">
       <head>

@@ -2,14 +2,15 @@ import { capitalize } from 'lodash';
 import { useContext, useEffect, useState } from 'react';
 import Container from '../../components/container';
 import { PokemonStoreContext } from '../../lib/pokemon-store';
+import api from 'app/lib/api';
+import { Pokemon } from '../../types/pokemon';
 
 export default function Home() {
-  const pokemonStore = useContext(PokemonStoreContext);
-  const [pokemons, setPokemons] = useState([]);
+  const [ownedPokemons, setOwnedPokemons] = useState<Pokemon[]>([]);
 
   useEffect(() => {
-    pokemonStore.getAllPokemons().then((pokemons) => setPokemons(pokemons));
-  }, [pokemonStore]);
+    api.ownedPokemons.findAllOwnedPokemon().then(setOwnedPokemons);
+  }, []);
 
   return (
     <Container>
@@ -17,7 +18,7 @@ export default function Home() {
         <h1>My Pokemons</h1>
       </div>
       <div className="flex">
-        {pokemons.map((pokemon) => (
+        {ownedPokemons.map((pokemon) => (
           <a
             className="w-1/3"
             key={pokemon.id}

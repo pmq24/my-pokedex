@@ -3,9 +3,11 @@ import TopAppBar from 'app/components/top-app-bar';
 
 export default function IndexLayout() {
   return (
-    <main>
+    <>
       <TopAppBar />
-      <Outlet />
-    </main>
+      <main className="m-auto p-4 w-screen lg:w-2/3">
+        <Outlet />
+      </main>
+    </>
   );
 }

@@ -6877,7 +6877,17 @@ html {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+@media (min-width: 768px) {
+  .md\:w-10\/12 {
+    width: 83.333333%;
+  }
+}
+
 @media (min-width: 1024px) {
+  .lg\:w-2\/3 {
+    width: 66.666667%;
+  }
+
   .lg\:w-10\/12 {
     width: 83.333333%;
   }

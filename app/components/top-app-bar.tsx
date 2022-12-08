@@ -1,12 +1,15 @@
-import { useOutletContext } from '@remix-run/react';
+import type { User } from '@supabase/supabase-js';
 import { useState, useEffect } from 'react';
+import type { TypedSupabaseClient } from '../types/supabase';
 import Logo from './logo';
 import SearchField from './search-field';
 
-export default function TopAppBar() {
-  const { supabase } = useOutletContext();
+type Props = {
+  supabase: TypedSupabaseClient;
+};
 
-  const [user, setUser] = useState();
+export default function TopAppBar({ supabase }: Props) {
+  const [user, setUser] = useState<User | null>();
 
   useEffect(() => {
     supabase.auth.getUser().then((res) => setUser(res.data.user));
@@ -21,7 +24,7 @@ export default function TopAppBar() {
         <div className="w-6/12">
           <SearchField />
         </div>
-        <div className="w-3/12">Hello {JSON.stringify(user)}</div>
+        <div className="w-3/12">Hello {user?.email}</div>
       </div>
     </header>
   );

@@ -1,4 +1,4 @@
-import type { Axios} from 'axios';
+import type { Axios } from 'axios';
 import { AxiosError } from 'axios';
 import type { Pokemon } from '../types/pokemon';
 import type { TypedSupabaseClient } from '../types/supabase/typed-supabase-client';
@@ -50,6 +50,29 @@ export default class PokemonAPI {
     if (error) {
       throw error;
     }
+  }
+
+  async getOwnedPokemons(): Promise<Pokemon[]> {
+    const userId = await this.getUserId();
+
+    const { data, error } = await this.supabase
+      .from('owned_pokemon')
+      .select('pokemon_id')
+      .eq('user_id', userId);
+
+    if (error) {
+      throw error;
+    }
+
+    const ids = data.map((record) => record.pokemon_id) ?? [];
+
+    const pokemons: Pokemon[] = [];
+
+    for (const id of ids) {
+      pokemons.push(await this.getPokemon(id));
+    }
+
+    return pokemons;
   }
 
   async ownsPokemon(id: number): Promise<boolean> {

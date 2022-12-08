@@ -1,15 +1,20 @@
 import { capitalize } from 'lodash';
 import { useEffect, useState } from 'react';
 import Container from '../../components/container';
-import api from 'app/lib/api';
 import { type Pokemon } from '../../types/pokemon';
+import { useOutletContext } from '@remix-run/react';
+import type { SupabaseOutletContext } from '../../types/supabase/supabase-outlet-context';
+import API from '../../api/api';
 
 export default function Home() {
+  const { supabase } = useOutletContext<SupabaseOutletContext>();
+  const api = new API(supabase);
+
   const [ownedPokemons, setOwnedPokemons] = useState<Pokemon[]>([]);
 
   useEffect(() => {
-    api.ownedPokemons.findAllOwnedPokemon().then(setOwnedPokemons);
-  }, []);
+    api.pokemons.getOwnedPokemons().then(setOwnedPokemons);
+  }, [supabase, api.pokemons]);
 
   return (
     <Container>
@@ -19,7 +24,7 @@ export default function Home() {
       <div className="flex">
         {ownedPokemons.map((pokemon) => (
           <a
-            className="w-2/12"
+            className="w-1/4"
             key={pokemon.id}
             href={`http://localhost:3000/pokemons/${pokemon.id}`}
           >

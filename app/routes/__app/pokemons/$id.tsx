@@ -35,7 +35,7 @@ export default function PokemonDetails() {
   }, [pokemon, hasUpdate]);
 
   return (
-    <Container>
+    <>
       <div className="flex justify-between w-full">
         <div className="prose">
           <h1>{capitalize(pokemon.name)}</h1>
@@ -82,6 +82,6 @@ export default function PokemonDetails() {
           },
         }}
       />
-    </Container>
+    </>
   );
 }

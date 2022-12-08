@@ -73,7 +73,7 @@ export default function IndexLayout() {
   return (
     <>
       <TopAppBar supabase={supabase} />
-      <main className="m-auto p-4 w-screen lg:w-10/12">
+      <main className="m-auto p-4 sm:w-full md:w-10/12 lg:w-1/2">
         <Outlet context={{ supabase }} />
       </main>
     </>

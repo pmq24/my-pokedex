@@ -1,14 +1,14 @@
-import type { LoaderArgs, LoaderFunction } from '@remix-run/node';
+import type { LoaderArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { Outlet, useFetcher, useLoaderData } from '@remix-run/react';
 import {
-  createBrowserClient,
   createServerClient,
+  createBrowserClient,
 } from '@supabase/auth-helpers-remix';
 import TopAppBar from 'app/components/top-app-bar';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
+export const loader = async ({ request }: LoaderArgs) => {
   const env = {
     SUPABASE_URL: process.env.SUPABASE_URL!,
     SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY!,
@@ -73,7 +73,7 @@ export default function IndexLayout() {
     <>
       <TopAppBar />
       <main className="m-auto p-4 w-screen lg:w-10/12">
-        <Outlet context={supabase} />
+        <Outlet context={{ supabase }} />
       </main>
     </>
   );

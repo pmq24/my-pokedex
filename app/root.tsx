@@ -7,10 +7,6 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react';
-import {
-  LocalStoragePokemonStore,
-  PokemonStoreContext,
-} from './lib/pokemon-store';
 import styles from './styles/app.css';
 
 export function links() {
@@ -31,12 +27,10 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <PokemonStoreContext.Provider value={new LocalStoragePokemonStore()}>
-          <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-          <LiveReload />
-        </PokemonStoreContext.Provider>
+        <Outlet />
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
       </body>
     </html>
   );

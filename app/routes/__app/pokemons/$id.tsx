@@ -7,8 +7,7 @@ import StatsTable from '../../../components/stats-table';
 import HeightWeightTable from '../../../components/height-weight-table';
 import Tabs from 'app/components/tabs';
 import MovesTable from '../../../components/moves-table';
-import { useContext, useEffect, useState } from 'react';
-import { PokemonStoreContext } from '../../../lib/pokemon-store';
+import { useEffect, useState } from 'react';
 import api from 'app/lib/api';
 import { type Pokemon } from 'app/types/pokemon';
 

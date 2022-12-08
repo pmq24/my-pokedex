@@ -20,7 +20,7 @@ export default function Home() {
       <div className="flex">
         {ownedPokemons.map((pokemon) => (
           <a
-            className="w-1/3"
+            className="w-2/12"
             key={pokemon.id}
             href={`http://localhost:3000/pokemons/${pokemon.id}`}
           >

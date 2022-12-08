@@ -26,7 +26,7 @@ export default function PokemonDetails() {
   const pokemon = useLoaderData<Pokemon>();
 
   const [owned, setOwned] = useState(false);
-  const [hasUpdate, setHasUpdate] = useState(false);
+  const [hasUpdate, setHasUpdate] = useState(true);
 
   useEffect(() => {
     if (hasUpdate) {

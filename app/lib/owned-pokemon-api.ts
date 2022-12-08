@@ -8,6 +8,34 @@ export class OwnedPokemonAPI {
     return this.getPokemonIDsFromLocalStorage().includes(id);
   }
 
+  async addOwnedPokemonWithID(id: number): Promise<void> {
+    let ownedPokemonIDs = this.getPokemonIDsFromLocalStorage();
+    ownedPokemonIDs.push(id);
+
+    // Removes duplicated IDs and sort ascendingly
+    ownedPokemonIDs = Array.from(new Set(ownedPokemonIDs)).sort(
+      (a, b) => a - b
+    );
+
+    localStorage.setItem('owned-pokemons', JSON.stringify(ownedPokemonIDs));
+  }
+
+  async removeOwnedPokemonWithID(id: number): Promise<void> {
+    let ownedPokemonIDs = this.getPokemonIDsFromLocalStorage();
+    const indexToRemove = ownedPokemonIDs.indexOf(id);
+
+    if (indexToRemove !== -1) {
+      ownedPokemonIDs.splice(indexToRemove, 1);
+    }
+
+    // Removes duplicated IDs and sort ascendingly
+    ownedPokemonIDs = Array.from(new Set(ownedPokemonIDs)).sort(
+      (a, b) => a - b
+    );
+
+    localStorage.setItem('owned-pokemons', JSON.stringify(ownedPokemonIDs));
+  }
+
   async findAllOwnedPokemon(): Promise<Pokemon[]> {
     const ids = this.getPokemonIDsFromLocalStorage().sort((a, b) => a - b);
 

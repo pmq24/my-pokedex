@@ -10,8 +10,9 @@ import MovesTable from '../../../components/moves-table';
 import { useContext, useEffect, useState } from 'react';
 import { PokemonStoreContext } from '../../../lib/pokemon-store';
 import api from 'app/lib/api';
+import { type Pokemon } from 'app/types/pokemon';
 
-export const loader: LoaderFunction = async function (data) {
+export const loader: LoaderFunction = async function (data): Promise<Pokemon> {
   const id = data.params.id;
 
   if (!id) {
@@ -22,19 +23,17 @@ export const loader: LoaderFunction = async function (data) {
 };
 
 export default function PokemonDetails() {
-  const pokemon = useLoaderData();
-  const pokemonStore = useContext(PokemonStoreContext);
+  const pokemon = useLoaderData<Pokemon>();
+
   const [owned, setOwned] = useState(false);
   const [hasUpdate, setHasUpdate] = useState(false);
 
   useEffect(() => {
     if (hasUpdate) {
-      pokemonStore
-        .getAllIDs()
-        .then((ids) => setOwned(ids.includes(pokemon.id)));
+      api.ownedPokemons.ownsPokemonWithID(pokemon.id).then(setOwned);
       setHasUpdate(false);
     }
-  }, [pokemonStore, pokemon, hasUpdate]);
+  }, [pokemon, hasUpdate]);
 
   return (
     <Container>
@@ -46,10 +45,14 @@ export default function PokemonDetails() {
           className={`btn ${owned ? 'btn-outline btn-success' : ''}`}
           onClick={
             owned
-              ? () =>
-                  pokemonStore.remove(pokemon.id).then(() => setHasUpdate(true))
-              : () =>
-                  pokemonStore.add(pokemon.id).then(() => setHasUpdate(true))
+              ? () => {
+                  api.ownedPokemons.removeOwnedPokemonWithID(pokemon.id);
+                  setHasUpdate(true);
+                }
+              : () => {
+                  api.ownedPokemons.addOwnedPokemonWithID(pokemon.id);
+                  setHasUpdate(true);
+                }
           }
         >
           {owned ? 'Owned' : 'Own'}

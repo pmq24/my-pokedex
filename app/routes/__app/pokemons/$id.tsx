@@ -1,7 +1,6 @@
 import { type LoaderFunction, redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { capitalize } from 'lodash';
-import Container from 'app/components/container';
 import TypeChips from 'app/components/type-chips';
 import StatsTable from '../../../components/stats-table';
 import HeightWeightTable from '../../../components/height-weight-table';

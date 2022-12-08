@@ -7,7 +7,7 @@ import {
 } from '@supabase/auth-helpers-remix';
 import TopAppBar from 'app/components/top-app-bar';
 import { useState, useEffect } from 'react';
-import type { Database } from '../lib/database.types';
+import type { Database } from 'app/types/supabase/database';
 
 export const loader = async ({ request }: LoaderArgs) => {
   const env = {
@@ -17,7 +17,7 @@ export const loader = async ({ request }: LoaderArgs) => {
 
   const response = new Response();
 
-  const supabase = createServerClient(
+  const supabase = createServerClient<Database>(
     process.env.SUPABASE_URL!,
     process.env.SUPABASE_ANON_KEY!,
     {

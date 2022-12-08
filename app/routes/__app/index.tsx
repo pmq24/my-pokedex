@@ -1,9 +1,8 @@
 import { capitalize } from 'lodash';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Container from '../../components/container';
-import { PokemonStoreContext } from '../../lib/pokemon-store';
 import api from 'app/lib/api';
-import { Pokemon } from '../../types/pokemon';
+import { type Pokemon } from '../../types/pokemon';
 
 export default function Home() {
   const [ownedPokemons, setOwnedPokemons] = useState<Pokemon[]>([]);

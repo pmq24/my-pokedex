@@ -7,20 +7,35 @@ import HeightWeightTable from '../../../components/height-weight-table';
 import Tabs from 'app/components/tabs';
 import MovesTable from '../../../components/moves-table';
 import { useEffect, useState } from 'react';
-import api from 'app/lib/api';
 import { type Pokemon } from 'app/types/pokemon';
 import type { SupabaseOutletContext } from '../../../types/supabase/supabase-outlet-context';
 import API from '../../../api/api';
 import { MdOutlineHourglassEmpty } from 'react-icons/md';
+import { createServerClient } from '@supabase/auth-helpers-remix';
 
-export const loader: LoaderFunction = async function (data): Promise<Pokemon> {
-  const id = data.params.id;
+export const loader: LoaderFunction = async function ({
+  params,
+  request,
+}): Promise<Pokemon> {
+  const response = new Response();
+  // an empty response is required for the auth helpers
+  // to set cookies to manage auth
+
+  const id = params.id;
 
   if (!id) {
     throw redirect('/');
   }
 
-  return await api.pokemons.findPokemonByID(+id);
+  const supabaseClient = createServerClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_ANON_KEY!,
+    { request, response }
+  );
+
+  const api = new API(supabaseClient);
+
+  return await api.pokemons.getPokemon(+id);
 };
 
 export default function PokemonDetails() {
@@ -29,7 +44,7 @@ export default function PokemonDetails() {
 
   const pokemon = useLoaderData<Pokemon>();
 
-  const [owned, setOwned] = useState(false);
+  const [owned, setOwned] = useState<boolean | 'not logged in'>(false);
   const [hasUpdate, setHasUpdate] = useState(true);
 
   useEffect(() => {
@@ -37,6 +52,7 @@ export default function PokemonDetails() {
       api.pokemons
         .ownsPokemon(pokemon.id)
         .then(setOwned)
+        .catch(() => setOwned('not logged in'))
         .then(() => setHasUpdate(false));
     }
   }, [supabase, hasUpdate, pokemon, api.pokemons]);
@@ -48,7 +64,13 @@ export default function PokemonDetails() {
           <h1>{capitalize(pokemon.name)}</h1>
         </div>
         <button
-          className={`btn ${owned ? 'btn-outline btn-success' : ''}`}
+          className={`btn ${
+            owned === 'not logged in'
+              ? 'btn-disabled'
+              : owned
+              ? 'btn-outline btn-success'
+              : ''
+          }`}
           onClick={
             owned
               ? () =>
@@ -61,7 +83,15 @@ export default function PokemonDetails() {
                     .then(() => setHasUpdate(true))
           }
         >
-          {hasUpdate ? <MdOutlineHourglassEmpty /> : owned ? 'Owned' : 'Own'}
+          {hasUpdate ? (
+            <MdOutlineHourglassEmpty />
+          ) : owned === 'not logged in' ? (
+            'Please log in'
+          ) : owned ? (
+            'Owned'
+          ) : (
+            'Own'
+          )}
         </button>
       </div>
       <section className="flex">

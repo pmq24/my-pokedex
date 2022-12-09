@@ -14,17 +14,17 @@ export default function Home() {
 
   useEffect(() => {
     api.pokemons.getOwnedPokemons().then(setOwnedPokemons);
-  }, [supabase, api.pokemons]);
+  }, []);
 
   return (
     <Container>
       <div className="prose">
         <h1>My Pokemons</h1>
       </div>
-      <div className="flex">
+      <div className="flex flex-wrap">
         {ownedPokemons.map((pokemon) => (
           <a
-            className="w-1/4"
+            className="sm:w-full md:w-1/2 lg:w-1/3"
             key={pokemon.id}
             href={`http://localhost:3000/pokemons/${pokemon.id}`}
           >
@@ -38,7 +38,10 @@ export default function Home() {
                 />
               </figure>
               <div className="card-body">
-                <h2 className="card-title">{capitalize(pokemon.name)}</h2>
+                <span className="card-title whitespace-nowrap">
+                  {capitalize(pokemon.name)}
+                </span>
+                whitespace-nowrap
               </div>
             </article>
           </a>

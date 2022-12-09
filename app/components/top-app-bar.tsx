@@ -1,8 +1,9 @@
 import type { User } from '@supabase/supabase-js';
 import { useState, useEffect } from 'react';
-import type { TypedSupabaseClient } from '../types/supabase';
+import type { TypedSupabaseClient } from '../types/supabase/typed-supabase-client';
 import Logo from './logo';
 import SearchField from './search-field';
+import UserBox from './user-box';
 
 type Props = {
   supabase: TypedSupabaseClient;
@@ -27,18 +28,7 @@ export default function TopAppBar({ supabase }: Props) {
           <SearchField />
         </div>
         <div>
-          <div className="avatar">
-            <div className="w-12 rounded-full">
-              {user?.user_metadata?.avatar_url && (
-                <img
-                  className="h-full"
-                  src={user.user_metadata.avatar_url}
-                  referrerPolicy="no-referrer"
-                  alt="user's avatar"
-                />
-              )}
-            </div>
-          </div>
+          <UserBox supabase={supabase} />
         </div>
       </div>
     </header>

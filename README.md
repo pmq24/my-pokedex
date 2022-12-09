@@ -24,4 +24,5 @@
     - [x] Log out
   - [x] UX/UI
     - [x] Responsive design (try resizing the window to see it in action :wink:)
+    - [x] Using [Storybook](https://storybook.js.org/) for some components
   

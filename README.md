@@ -2,6 +2,12 @@
 
 - Requirement: [here](https://postco.notion.site/Take-home-assessment-JS-94ae6e6d24ec4e508fd5126665f96fd4)
 
+## How to run the project:
+
+1. Ensure that you have `.env` includes some Supabase variables
+2. Run the command `npm install && npm run dev`
+3. (Optional) Run the command `npm run storybook` to check the Storybook
+
 ## Required features:
 
 - All pages:

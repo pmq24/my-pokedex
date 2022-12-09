@@ -22,26 +22,54 @@ const Template: StoryFn<Props> = (args) => <StatsTable {...args} />;
 
 export const Example = Template.bind({});
 Example.args = {
-  stats: {
-    hp: {
-      base_stat: 100,
+  stats: [
+    {
+      base_stat: 48,
+      effort: 1,
+      stat: {
+        name: 'hp',
+        url: 'https://pokeapi.co/api/v2/stat/1/',
+      },
+    },
+    {
+      base_stat: 48,
       effort: 0,
+      stat: {
+        name: 'attack',
+        url: 'https://pokeapi.co/api/v2/stat/2/',
+      },
     },
-    attack: {
-      base_stat: 150,
-      effort: 3,
-    },
-    defense: {
-      base_stat: 140,
+    {
+      base_stat: 48,
       effort: 0,
+      stat: {
+        name: 'defense',
+        url: 'https://pokeapi.co/api/v2/stat/3/',
+      },
     },
-    'special-attack': {
-      base_stat: 100,
+    {
+      base_stat: 48,
       effort: 0,
+      stat: {
+        name: 'special-attack',
+        url: 'https://pokeapi.co/api/v2/stat/4/',
+      },
     },
-    'special-defense': {
-      base_stat: 90,
+    {
+      base_stat: 48,
       effort: 0,
+      stat: {
+        name: 'special-defense',
+        url: 'https://pokeapi.co/api/v2/stat/5/',
+      },
     },
-  },
+    {
+      base_stat: 48,
+      effort: 0,
+      stat: {
+        name: 'speed',
+        url: 'https://pokeapi.co/api/v2/stat/6/',
+      },
+    },
+  ],
 };

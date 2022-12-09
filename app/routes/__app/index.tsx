@@ -41,7 +41,6 @@ export default function Home() {
                 <span className="card-title whitespace-nowrap">
                   {capitalize(pokemon.name)}
                 </span>
-                whitespace-nowrap
               </div>
             </article>
           </a>

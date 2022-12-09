@@ -24,7 +24,15 @@ const Template: StoryFn<Props> = (args) => <TypeChips {...args} />;
 
 export const Example = Template.bind({});
 Example.args = {
-  types: ['normal', 'fire'],
+  types: [
+    {
+      slot: 1,
+      type: {
+        name: 'normal',
+        url: 'https://pokeapi.co/api/v2/type/1/',
+      },
+    },
+  ],
 };
 
 export const ALotOfTypes = Template.bind({});
@@ -38,15 +46,113 @@ ALotOfTypes.parameters = {
 };
 ALotOfTypes.args = {
   types: [
-    'normal',
-    'fire',
-    'water',
-    'bug',
-    'dark',
-    'flying',
-    'ice',
-    'grass',
-    'ground',
+    {
+      slot: 1,
+      type: {
+        name: 'normal',
+        url: 'https://pokeapi.co/api/v2/type/1/',
+      },
+    },
+    {
+      slot: 1,
+      type: {
+        name: 'fire',
+        url: 'https://pokeapi.co/api/v2/type/1/',
+      },
+    },
+    {
+      slot: 1,
+      type: {
+        name: 'ice',
+        url: 'https://pokeapi.co/api/v2/type/1/',
+      },
+    },
+    {
+      slot: 1,
+      type: {
+        name: 'water',
+        url: 'https://pokeapi.co/api/v2/type/1/',
+      },
+    },
+    {
+      slot: 1,
+      type: {
+        name: 'ice',
+        url: 'https://pokeapi.co/api/v2/type/1/',
+      },
+    },
+    {
+      slot: 1,
+      type: {
+        name: 'rock',
+        url: 'https://pokeapi.co/api/v2/type/1/',
+      },
+    },
+    {
+      slot: 1,
+      type: {
+        name: 'normal',
+        url: 'https://pokeapi.co/api/v2/type/1/',
+      },
+    },
+    {
+      slot: 1,
+      type: {
+        name: 'fire',
+        url: 'https://pokeapi.co/api/v2/type/1/',
+      },
+    },
+
+    {
+      slot: 1,
+      type: {
+        name: 'water',
+        url: 'https://pokeapi.co/api/v2/type/1/',
+      },
+    },
+    {
+      slot: 1,
+      type: {
+        name: 'rock',
+        url: 'https://pokeapi.co/api/v2/type/1/',
+      },
+    },
+    {
+      slot: 1,
+      type: {
+        name: 'normal',
+        url: 'https://pokeapi.co/api/v2/type/1/',
+      },
+    },
+    {
+      slot: 1,
+      type: {
+        name: 'fire',
+        url: 'https://pokeapi.co/api/v2/type/1/',
+      },
+    },
+    {
+      slot: 1,
+      type: {
+        name: 'ice',
+        url: 'https://pokeapi.co/api/v2/type/1/',
+      },
+    },
+
+    {
+      slot: 1,
+      type: {
+        name: 'rock',
+        url: 'https://pokeapi.co/api/v2/type/1/',
+      },
+    },
+    {
+      slot: 1,
+      type: {
+        name: 'water',
+        url: 'https://pokeapi.co/api/v2/type/1/',
+      },
+    },
   ],
 };
 

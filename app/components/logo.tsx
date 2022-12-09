@@ -4,7 +4,7 @@ type Props = {
 
 export default function Logo({ baseURL }: Props) {
   return (
-    <a href={baseURL}>
+    <a href="http://localhost:3000">
       <img src="/postco.svg" alt="PostCo's logo" />
     </a>
   );
